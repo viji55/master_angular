@@ -1,0 +1,67 @@
+import { NgModule } from '@angular/core';
+import { Routes,RouterModule } from '@angular/router';
+
+//components
+import { FrontendComponent } from './frontend.component';
+//import { CustomerGuard } from '../../services/customer.guard';
+
+
+
+const routes: Routes = [
+{path:'', 
+component: FrontendComponent,
+children:[
+    { path: '', redirectTo: 'home'},
+    {
+        path:'home',loadChildren:'./home/home.module#HomeModule',
+        data:{
+            breadcrumbs:'Home'
+        }
+    },
+    {
+        path:'products',loadChildren:'../frontend/products/products.module#ProductsModule',
+        data:{
+            breadcrumbs:'Products'
+        },//canActivate: [CustomerGuard]
+    },
+    {
+        path:'aboutus',loadChildren:'../frontend/aboutus/aboutus.module#AboutusModule',
+        data:{
+            breadcrumbs:'About us'
+        },//canActivate: [CustomerGuard]
+    },
+    {
+        path:'checkout',loadChildren:'../frontend/checkout/checkout.module#CheckoutModule',
+        data:{
+            breadcrumbs:'Checkout'
+        },//canActivate: [CustomerGuard]
+    },
+    {
+        path:'profile',loadChildren:'../frontend/profile/profile.module#ProfileModule',
+        data:{
+            breadcrumbs:'Profile'
+        },//canActivate: [CustomerGuard]
+    },
+    {
+        path:'login',loadChildren:'../frontend/login/login.module#LoginModule',
+        data:{
+            breadcrumbs:'Customer Login'
+        }
+    }
+]
+
+
+}
+];
+
+
+@NgModule({
+    imports:[
+        RouterModule.forChild(routes)
+    ],
+    exports:[
+        RouterModule
+    ]
+})
+
+export class FrontendRoutingModule {}

@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+   <form [formGroup]="myForm" name="myForm" (ngSubmit)="loginAdmin( myForm.valid, myForm.value)">
+      <mat-card class="backGroundColor">
+         <mat-card-header>
+            <mat-card-title class="alignCenter"> Login</mat-card-title>
+         </mat-card-header>
+         <mat-card-content fxLayout="column">
+            <mat-form-field>
+               <input matInput placeholder="Email" formControlName="email" (focus)="myFocusVar = true" (blur)="myFocusVar = false">
+               <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+               <mat-error *ngIf="!myForm.controls.email.valid || !formValid">
+                  Email is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field>
+               <input type="password" matInput placeholder="password" formControlName="password">
+               <mat-error *ngIf="!myForm.controls.password.valid || !formValid">
+                  Password is <strong>required</strong></mat-error>
+            </mat-form-field>
+             <span style="color:red" *ngIf="invalidlogin || !formValid">
+                     Username or Password is <strong>Invalid</strong></span>
+         </mat-card-content>
+         <mat-card-actions align="end">
+            <button mat-raised-button color="primary">Login</button>
+         </mat-card-actions>
+      </mat-card>
+   </form>
+</div>

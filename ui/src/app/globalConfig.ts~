@@ -1,0 +1,91 @@
+import {Injectable} from '@angular/core';
+import { environment } from '../environments/environment'
+
+
+@Injectable()
+
+export class GlobalConfig {
+    
+}
+
+export const GlobalVariable = Object.freeze({
+    //BASE_API_URL: environment.api_url,
+    BASE_FOLDER_URL: 'api/',
+    //BASE_FRONTEND_URL: environment.frontend_url,
+    PORT_NUMBER: '4200',
+    PER_PAGE_SIZE: 10,
+    PAGE_SIZE_OPTIONS: [5, 10, 20, 50],
+    ShowFirstLastButtons: true
+});
+
+export const GlobalMessage = Object.freeze({
+    1: 'Success.',
+    2: 'Error.',
+    3: 'Invalid.',
+    4: 'Something went wrong. Please try again later.',
+
+    11: 'There are some error with query.',
+
+    101: 'Registration Successfull.',
+    102: 'Invalid email.',
+    103: 'Email already exist.',
+    104: 'Invalid credentials.',
+    105: 'Wrong Password.',
+    106: 'Your account is inactive.',
+    107: 'Sorry, no records found.',
+    108: 'Welcome to SeedLinked Portal.',
+    109: 'Profile has been updated succussfully.',
+
+    201: 'Record added succussfully.',
+    202: 'Record updated successfully.',
+    203: 'Record deleted successfully.'
+});
+
+const customerApi = 'customer';
+const commonApi   = 'common';
+const adminApi    = 'admin';
+const productApi  = 'products';
+const categoriesApi  = 'categories';
+const ordersApi  = 'orders';
+
+export const NodeApiURL = Object.freeze({
+   ADMINLOGIN : adminApi +'/login', //category
+   ADDCATEGORIES : categoriesApi +'/addCategories',
+   EDITCATEGORIES : categoriesApi +'/editCategories',
+   GETCATEGORIES : categoriesApi +'/getCategories',
+   ALLCATEGORIES : categoriesApi +'/allCategories',
+   UPDATECATEGORIES : categoriesApi +'/updateCategories',
+   UPDATECATIMG : categoriesApi +'/updateCategoriesImg',
+   REMOVECATIMG : categoriesApi +'/removeCategoriesImg',
+   DELETECAT : categoriesApi +'/deleteCategories',
+   DELETEALLCAT : categoriesApi +'/deleteAllCategories',//Products
+   ADDPRODUCTS : productApi +'/addProducts',
+   EDITPRODUCTS : productApi +'/editProducts',
+   GETPRODUCTS : productApi +'/getProducts',
+   ALLPRODUCTS : productApi +'/allProducts',
+   UPDATEPRODUCTS : productApi +'/updateProducts',
+   UPDATEPROIMG : productApi +'/updateProductsImg',
+   REMOVEPROIMG : productApi +'/removeProductsImg',
+   DELETEPRO : productApi +'/deleteProducts',
+   DELETEALLPRO : productApi +'/deleteAllProducts',
+   CUSTOMERLOGIN : customerApi +'/login', //customer
+   CUSTOMERTEMPCART : customerApi +'/customerTempCart',
+   CUSTOMERADDADDRESS : customerApi +'/customerAddAddress',
+   CUSTOMEREDITADDRESS : customerApi +'/customerEditAddress',
+   CUSTOMERDELETEADDRESS : customerApi +'/customerDeleteAddress',
+   CUSTOMERALLADDRESS : customerApi +'/customerALLAddress',
+   CUSTOMERPROFILE : customerApi +'/customerProfile',
+   CUSTOMERUPDATE : customerApi +'/customerUpdate',
+   CUSTOMERSTATUSUPDATE : customerApi +'/customerStatusUpdate',
+   CUSTOMERADD : customerApi +'/customerAdd',
+   CUSTOMERALL : customerApi +'/customerAll',
+   CUSTOMERDELETE : customerApi +'/customerDelete',
+   CUSTOMERPROFILEIMAGEUPDATE : customerApi +'/customerImgUpdate',
+   CUSTOMERDETAILS : customerApi + '/customerDetails',
+   DELETEALLCUSTOMER : customerApi +'/deleteAllCustomer',
+   PLACEORDER : customerApi +'/placeOrder',
+   ORDERSALL : ordersApi +'/ordersAll',
+   ORDERSGET : ordersApi+ '/ordersget',
+   ORDERSSTATUSUPDATE : ordersApi+ '/ordersStatusUpdate',
+   GETALLCOUNTS : customerApi + '/getAllCounts',
+});

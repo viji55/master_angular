@@ -1,0 +1,95 @@
+<div fxLayout="column" fxLayoutAlign="alignCenter">
+      
+  <form #formDirective="ngForm" [formGroup]="myForm" name="myForm" (ngSubmit)="addTeacher( myForm.valid, myForm.value)">
+     <mat-card class="backGroundColor">
+        <mat-card-header>
+           <mat-card-title class="alignCenter"> Add Teachers</mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+
+            <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstName" (focus)="myFocusVar = true" (blur)="myFocusVar = false"  type="text">
+                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                <mat-error *ngIf="!myForm.controls.firstName.valid || !formValid">
+                   First Name is <strong>required</strong></mat-error>
+             </mat-form-field>
+
+             <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastName" (focus)="myFocusVar = true" (blur)="myFocusVar = false" type="text">
+                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                <mat-error *ngIf="!myForm.controls.lastName.valid || !formValid">
+                   Last Name is <strong>required</strong></mat-error>
+             </mat-form-field>
+
+           <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" (focus)="myFocusVar = true" (blur)="myFocusVar = false">
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <mat-error *ngIf="!myForm.controls.email.valid || !formValid">
+                 Email is <strong>required</strong></mat-error>
+           </mat-form-field>
+
+           <mat-form-field>
+              <mat-select placeholder="Select" formControlName="qualification">
+                  <mat-option value="{{data.id}}" *ngFor="let data of qualificationList">{{data.course_name}}</mat-option>
+                  
+                </mat-select>
+              
+              <mat-error *ngIf="!myForm.controls.qualification.valid || !formValid">
+                 Qualification is <strong>required</strong></mat-error>
+           </mat-form-field>
+
+           <mat-form-field>
+              <input matInput placeholder="Total experience" formControlName="experience" (focus)="myFocusVar = true" (blur)="myFocusVar = false" type="number">
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <mat-error *ngIf="!myForm.controls.experience.valid || !formValid">
+                 Experience is <strong>required</strong></mat-error>
+           </mat-form-field>
+
+
+           <mat-form-field>
+            <mat-select placeholder="Select" formControlName="designation">
+                  <mat-option value="{{data.id}}" *ngFor="let data of professionList">{{data.designation_name}}</mat-option>
+               
+                </mat-select>
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <mat-error *ngIf="!myForm.controls.designation.valid || !formValid">
+                  Designation is <strong>required</strong></mat-error>
+           </mat-form-field>
+
+           Martial:
+              <mat-radio-group formControlName="martialStatus" ngModel>
+                  <mat-radio-button value="married">Married</mat-radio-button>
+                  <mat-radio-button value="single">Single</mat-radio-button>
+                </mat-radio-group>
+          <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+          <mat-error *ngIf="!myForm.controls.martialStatus.valid || !formValid">
+              MartialStatus is <strong>required</strong></mat-error>
+       
+
+            Gender:
+          <mat-radio-group formControlName="gender" ngModel>
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+      <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+      <mat-error *ngIf="!myForm.controls.gender.valid || !formValid">
+         Gender is <strong>required</strong></mat-error>
+   
+
+
+   <mat-form-field>
+      <input matInput [matDatepicker]="picker" formControlName="joinedDate" laceholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="!myForm.controls.joinedDate.valid || !formValid">
+          Joining Date is <strong>required</strong></mat-error>
+    </mat-form-field>
+      
+          
+        </mat-card-content>
+        <mat-card-actions align="end">
+           <button mat-raised-button color="primary">Add</button>
+        </mat-card-actions>
+     </mat-card>
+  </form>
+</div>

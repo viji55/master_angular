@@ -1,0 +1,148 @@
+<div class="bounds">
+    <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+  
+      <div fxFlex="100" class="sec1" fxFlex.xs="100">
+        <mat-card class="catMargin">
+          Faculties
+          
+          <div align="end"> <a routerLink='/f/c/teachers/add' mat-raised-button> Add Faculty</a> </div>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title class="alignCenter"> List </mat-card-title>
+  
+          </mat-card-header>
+
+          <mat-card-content>
+  
+            <div class="filter-section">
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start">
+                <div class="filter" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  
+                  <div class="form-group" style="margin-right: 20px;">
+                    <mat-form-field fxFlexFill>
+                      <mat-select (ngModelChange)="applyFilter()" [formControl]="filterBy" placeholder="Filter by">
+                        <mat-option *ngFor="let s of searchArr" [value]="s.key">{{s.text}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group" style="position: relative;margin-top: 30px;">
+                    <mat-form-field fxFlexFill>
+                      <input matInput #filter placeholder="Type Value">
+                    </mat-form-field>
+                    <a class="clearall" matTooltip="Reset" (click)="resetFilter()">
+                      <i class="material-icons">refresh</i>
+                    </a>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between end">
+                  <div class="set-actions" fxLayoutAlign="space-between center">
+  
+                    <div>
+                      <button mat-raised-button [matMenuTriggerFor]="menu" class="action">Actions
+                        <i class="material-icons">keyboard_arrow_down</i>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <!-- <button mat-menu-item>Status</button> -->
+                        <button mat-menu-item (click)="bulkDelete()">Delete</button>
+                        <button mat-menu-item (click)="tableToExcel()">Export</button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort [class.isMobile]="isMobile">
+                      
+                <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                      </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                      </mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+
+                <ng-container matColumnDef="seqNo">
+                    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                    <mat-cell *matCellDef="let teachersList">{{teachersList.id}}</mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="First Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                    <mat-cell class="description-cell"
+                              *matCellDef="let teachersList">{{teachersList.t_first_name}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Last Name">
+                    <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+                    <mat-cell class="description-cell"
+                              *matCellDef="let teachersList">{{teachersList.t_last_name}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                    <mat-cell class="description-cell"
+                              *matCellDef="let teachersList">{{teachersList.t_email}}</mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="Gender">
+                    <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+                    <mat-cell class="duration-cell"
+                              *matCellDef="let teachersList">{{teachersList.t_gender}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Profession">
+                  <mat-header-cell *matHeaderCellDef>Profession</mat-header-cell>
+                  <mat-cell class="description-cell"
+                            *matCellDef="let teachersList">
+                          {{teachersList.t_designation}}
+                          </mat-cell>
+              </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell class="duration-cell"
+                              *matCellDef="let teachersList">
+                              <button mat-raised-button (click)="editFaculty(teachersList.id)"> Edit</button>
+                              <button mat-raised-button (click)="deleteFaculty(teachersList.id)"> Delete</button>
+                            </mat-cell>
+                </ng-container>
+                
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                
+            </mat-table>
+            <div *ngIf="this.dataSource?.filteredData?.length == 0" class="no-records">
+                <h2>
+                  <i class="material-icons">
+                    warning </i> Sorry, no records found</h2>
+              </div>
+            <mat-paginator #paginator length="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            [showFirstLastButtons]="showFirstLastButtons" [pageIndex]="currentPage">
+          </mat-paginator>
+  
+  
+  
+  
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <!-- <div fxFlex="10" class="sec2" >
+     second-section
+  </div>
+  <div fxFlex="15" class="sec3" fxFlex.xs="15">
+     third-section
+  </div> -->
+
+ 
+  
+    </div>
+  </div>
